@@ -1,0 +1,60 @@
+.map-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.city-marker {
+    cursor: pointer;
+}
+
+.city-name {
+    fill: floralwhite;
+    font-size: 50px;
+    font-family: Arial;
+    text-anchor: middle;
+    font-weight: bold;
+}
+
+.city-name.selected {
+    fill: red;
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.city-icon {
+    cursor: pointer;
+}
+
+.map-container {
+    width: 100%;
+    height: 100%;
+}
+
+.line {
+    transition: stroke 0.3s ease;
+}
+
+.animated-line {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: dash 2s linear forwards, glow 1.5s infinite alternate;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes glow {
+    from {
+        stroke: red;
+        stroke-width: 6;
+        filter: drop-shadow(0 0 5px red);
+    }
+    to {
+        stroke: red;
+        stroke-width: 8;
+        filter: drop-shadow(0 0 20px red);
+    }
+}

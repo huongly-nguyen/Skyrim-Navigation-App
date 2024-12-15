@@ -1,0 +1,40 @@
+services:
+# keycloak:
+#   image: quay.io/keycloak/keycloak:latest
+#   environment:
+#     KEYCLOAK_USER: admin
+#   ports:
+#      - 9080:9080
+#  mongo:
+#    image: mongo
+#    restart: always
+#    container_name: mongo
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - ./dump:/data/db
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: mongo-1
+#      MONGO_INITDB_ROOT_PASSWORD: mongo-1
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+    env_file:
+      - .env.development
+    ports:
+      - 3000:3000
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend/app:/app
+    env_file:
+      - .env.development
+    ports:
+      - "4243:4243"
+    
+

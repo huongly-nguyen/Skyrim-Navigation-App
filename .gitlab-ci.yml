@@ -1,0 +1,99 @@
+stages:
+  - build
+  - test
+  - deploy
+
+variables:
+  DOCKER_TLS_CERTDIR: "/certs"
+  DOCKER_IMAGE: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/docker:latest
+  PYTHON_IMAGE: ${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/python:3.8-slim
+
+services:
+  - docker:dind
+
+.docker-login: &docker-login
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - docker login -u $CI_DEPENDENCY_PROXY_USER -p $CI_DEPENDENCY_PROXY_PASSWORD $CI_DEPENDENCY_PROXY_SERVER
+
+.build-job-template: &build-job-template
+  <<: *docker-login
+  stage: build
+  image: $DOCKER_IMAGE
+  script:
+    - cd $CI_PROJECT_DIR/$APP
+    - docker pull "${CI_REGISTRY_IMAGE}/${APP}:main" || true
+    - docker build --cache-from "${CI_REGISTRY_IMAGE}/${APP}:main" -t "${CI_REGISTRY_IMAGE}/${APP}:${CI_COMMIT_REF_SLUG}" --build-arg "GITLAB PROXY=${CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX}/" --build-arg REACT_APP_API_BASE_URL=${REACT_APP_API_BASE_URL} --build-arg REACT_APP_KEYCLOAK_URL=${REACT_APP_KEYCLOAK_URL} --build-arg REACT_APP_KEYCLOAK_REALM=${REACT_APP_KEYCLOAK_REALM} --build-arg REACT_APP_KEYCLOAK_CLIENT_ID=${REACT_APP_KEYCLOAK_CLIENT_ID} --build-arg REACT_APP_KEYCLOAK_REDIRECT_LOGIN=${REACT_APP_KEYCLOAK_REDIRECT_LOGIN} --build-arg REACT_APP_KEYCLOAK_REDIRECT_LOGOUT=${REACT_APP_KEYCLOAK_REDIRECT_LOGOUT} .
+    - docker push "${CI_REGISTRY_IMAGE}/${APP}:${CI_COMMIT_REF_SLUG}"
+
+build-backend-job:
+  <<: *build-job-template
+  variables:
+    APP: backend
+  only:
+    changes:
+      - backend/**/*
+
+build-frontend-job:
+  <<: *build-job-template
+  variables:
+    APP: frontend
+  only:
+    changes:
+      - frontend/**/*
+
+black:
+  stage: test
+  image: $PYTHON_IMAGE
+  script:
+    - cd backend
+    - pip install -r requirements.txt
+    - black .
+  only:
+    changes:
+      - backend/**/*
+
+fleck8-checking:
+  stage: test
+  image: $PYTHON_IMAGE
+  script:
+    - cd backend
+    - pip install -r requirements.txt
+    - flake8 .
+  only:
+    changes:
+      - backend/**/*
+
+unit-test-job:
+  stage: test
+  image: $PYTHON_IMAGE
+  script:
+    - cd backend
+    - pip install -r requirements.txt
+    - pytest app/tests/tests_routing.py app/tests/tests_api.py
+  only:
+    changes:
+      - backend/**/*
+
+.deploy-job-template: &deploy-job-template
+  stage: deploy
+  image: $DOCKER_IMAGE
+  before_script:
+    - apt-get update && apt-get install -y openssh-client
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+deploy-job:
+  <<: *deploy-job-template
+  script:
+    - scp docker-compose.yml debian@10.192.152.109:~ 
+    - ssh debian@10.192.152.109 "cd ~ && docker container prune -f && docker image prune -af && docker compose pull && docker compose up -d"
+  only:
+    - main
+
+include:
+  - template: Jobs/Dependency-Scanning.gitlab-ci.yml

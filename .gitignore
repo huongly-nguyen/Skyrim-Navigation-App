@@ -1,0 +1,12 @@
+.env.production
+__pycache__
+.mypy_cache
+.vscode
+.idea
+.DS_Store
+.venv
+backend/venv
+.history
+frontend/node_modules
+dump
+/dump

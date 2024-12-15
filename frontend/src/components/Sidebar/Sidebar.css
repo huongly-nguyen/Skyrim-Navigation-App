@@ -1,0 +1,89 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: -1000px; /* Hide the sidebar by default */
+  width: 700px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  overflow-y: auto;
+  z-index: 1000;
+  transition: left 0.3s ease; /* Animation for showing/hiding the sidebar */
+}
+
+.sidebar.visible {
+  left: -300px; /* Show the sidebar */
+}
+
+.sidebar h2 {
+  font-family: 'Morris Roman', serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+  padding: 10px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.sidebar ul li:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.history-entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.delete-button {
+  display: none;
+  margin-left: 10px;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.history-entry:hover .delete-button {
+  display: inline;
+}
+
+.sidebar button {
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: 'Morris Roman', serif;
+  margin-top: 10px;
+}
+
+.sidebar button:hover {
+  background-color: #333333;
+}
+
+.toggle-button {
+  background-color: #4a4a4a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: 'Morris Roman', serif;
+  z-index: 1001; /* Ensure the button is above the sidebar */
+}
+
+.toggle-button:hover {
+  background-color: #333333;
+}

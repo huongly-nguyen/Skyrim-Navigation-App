@@ -1,0 +1,75 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/auto-instrumentations-web": "^0.40.0",
+    "@opentelemetry/context-zone-peer-dep": "^1.25.1",
+    "@opentelemetry/exporter-collector": "^0.25.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.52.1",
+    "@opentelemetry/instrumentation-fetch": "^0.52.1",
+    "@opentelemetry/instrumentation-xml-http-request": "^0.52.1",
+    "@opentelemetry/sdk-trace-web": "^1.25.1",
+    "@react-keycloak/web": "^3.4.0",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "axios": "^1.7.2",
+    "express": "^4.19.2",
+    "keycloak-js": "^25.0.0",
+    "leaflet": "^1.9.4",
+    "postcss": "^8.4.39",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-leaflet": "^4.2.1",
+    "react-router-dom": "^6.23.1",
+    "react-scripts": "^5.0.1",
+    "svg-pan-zoom": "^3.6.1",
+    "web-vitals": "^4.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "react-scripts dev"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/node": "^20.14.5",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "eslint": "^8.56.0",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^28.6.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.2",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "typescript": "^3.2.1"
+  },
+  "overrides": {
+    "nth-check": "2.1.1",
+    "postcss": "^8.4.39"
+  }
+}

@@ -1,0 +1,69 @@
+.route-selector-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.route-selector-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.selected-city-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 80%;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  min-width: 500px;
+}
+
+.city-label {
+  font-weight: bold;
+  margin-right: 10px;
+  color: #333;
+}
+
+.city-name {
+  flex-grow: 1;
+  text-align: left;
+  color: #555;
+}
+
+.calculate-button {
+  background-color: #4a4a4a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-family: 'Morris Roman', serif;
+}
+
+.calculate-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.calculate-button:hover:enabled {
+  background-color: #333333;
+}
+
+.route-display {
+  font-weight: bold;
+  margin-top: 20px;
+  color: #333;
+}

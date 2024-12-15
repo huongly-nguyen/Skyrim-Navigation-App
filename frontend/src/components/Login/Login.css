@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Morris+Roman&display=swap');
+
+/* Ensure the background iframe covers the entire container */
+.background-iframe {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure it is behind other content */
+  overflow: hidden;
+}
+
+/* Center the login container */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Morris Roman', serif;
+}
+
+/* Style the login box */
+.login-box {
+  background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  z-index: 2; /* Ensure it is above the overlay */
+}
+
+/* Style the login title */
+.login-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+  font-family: 'Morris Roman', serif;
+}
+
+/* Style the login button */
+.login-button {
+  background-color: #4a4a4a;
+  color: white;
+  border: 2px solid #2e2e2e;
+  border-radius: 5px;
+  padding: 20px 40px;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.3s, background-color 0.3s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: 'Morris Roman', serif;
+}
+
+/* Add hover effect */
+.login-button:hover {
+  background-color: #333333;
+}
+
+/* Animation for when the button is clicked */
+.login-button.clicked {
+  animation: buttonClick 1s forwards;
+}
+
+/* Keyframes for the button click animation */
+@keyframes buttonClick {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}

@@ -1,0 +1,69 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: Arial, sans-serif;
+  background: url('../public/background_image.jpg');
+  text-align: center;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  padding: 20px;
+  transform: scale(0.8);
+  transform-origin: top center;
+}
+
+.title {
+  padding: 10px 20px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 36px;
+  color: black;
+  border-radius: 8px;
+}
+
+.route-selector-container {
+  width: 90%;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  background-color: white;
+  border-radius: 8px;
+  background-color: white;
+  margin: 20px 0;
+}
+
+.map-display-container {
+  flex: 1;
+  width: 90%;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin: 20px 0;
+  padding: 20px;
+  overflow: hidden;
+  background-color: white
+}
+
+.city-marker {
+  cursor: pointer;
+}
+
+.city-name {
+  font-size: 50px;
+  text-anchor: middle;
+  fill: floralwhite;
+  font-weight: bold;
+}
+
+.city-name.selected {
+  font-size: 70px;
+  font-weight: bold;
+  fill: red;
+}
